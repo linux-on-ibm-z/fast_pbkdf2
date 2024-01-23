@@ -90,16 +90,17 @@ jobs:
     - name: Enable build and tests on s390x
       run: |
         sudo docker run --rm --privileged tonistiigi/binfmt:qemu-v6.2.0
-    - name: Run build 
+    - name: Run build
       uses: uraimo/run-on-arch-action@v2.6.0
       with:
         arch: s390x
         distro: ubuntu22.04
         run: | 
+         set -e
          apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y git rebar3 gcc g++ libssl-dev
          git clone https://github.com/esl/fast_pbkdf2
          cd fast_pbkdf2/
          rebar3 compile
          rebar3 as test get-deps
          rebar3 as test compile
-         rebar3 as test ct          
+         rebar3 as test ct
