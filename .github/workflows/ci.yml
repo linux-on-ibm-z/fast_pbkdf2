@@ -98,8 +98,6 @@ jobs:
         run: | 
          set -e
          apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y git rebar3 gcc g++ libssl-dev
-         git clone https://github.com/esl/fast_pbkdf2
-         cd fast_pbkdf2/
          rebar3 compile
          rebar3 as test get-deps
          rebar3 as test compile
